@@ -1,4 +1,3 @@
-import { getSystemModelList } from '@/api/system';
 import type { ShareChatEditType } from '@/types/model';
 import type { ModelSchema } from '@/types/mongoSchema';
 
@@ -59,15 +58,11 @@ export const ChatModelMap = {
   }
 };
 
-let chatModelList: ChatModelItemType[] = [];
-export const getChatModelList = async () => {
-  if (chatModelList.length > 0) {
-    return chatModelList;
-  }
-  const list = await getSystemModelList();
-  chatModelList = list;
-  return list;
-};
+export const chatModelList: ChatModelItemType[] = [
+  ChatModelMap[OpenAiChatEnum.GPT3516k],
+  ChatModelMap[OpenAiChatEnum.GPT35],
+  ChatModelMap[OpenAiChatEnum.GPT4]
+];
 
 export const defaultModel: ModelSchema = {
   _id: 'modelId',
